@@ -10,6 +10,7 @@ namespace PhoneBookApp.PhoneBookApi.Services
         Task<Response<ContactDto>> GetContactByIdAsync(string id);       
         Task<Response<ContactCreateDto>> CreateContactAsync(ContactCreateDto contactDto);
         Task<Response<NoContent>> DeleteContactAsync(string id);
-       
+        Task<Response<ContactDetailDto>> GetContactDetailByIdAsync(string id);
+
     }
 }

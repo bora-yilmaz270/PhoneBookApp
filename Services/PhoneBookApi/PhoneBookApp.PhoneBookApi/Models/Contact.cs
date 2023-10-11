@@ -10,5 +10,8 @@ namespace PhoneBookApp.PhoneBookApi.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }
+
+        [BsonIgnore]
+        public virtual List<ContactInfo> ContactInfos { get; set; }
     }
 }

@@ -25,6 +25,14 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
             return CreateActionResultInstance(contacts);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var contacts = await _contactService.GetContactDetailByIdAsync(id);
+            
+            return CreateActionResultInstance(contacts);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(ContactCreateDto contactCreateDto)
         {

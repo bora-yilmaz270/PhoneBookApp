@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using PhoneBookApp.PhoneBookApi.Models;
 
 namespace PhoneBookApp.PhoneBookApi.Dtos
 {
@@ -10,6 +11,4 @@ namespace PhoneBookApp.PhoneBookApi.Dtos
         public string LastName { get; set; }
         public string Company { get; set; }
     }
-
-
 }
