@@ -13,6 +13,7 @@ namespace PhoneBookApp.PhoneBookApi.Mapping
 
             CreateMap<ContactInfo, ContactInfoCreateDto>().ReverseMap();
             CreateMap<Contact, ContactCreateDto>().ReverseMap();           
+            CreateMap<Contact, ContactDetailDto>().ReverseMap();           
           
         }
     }
