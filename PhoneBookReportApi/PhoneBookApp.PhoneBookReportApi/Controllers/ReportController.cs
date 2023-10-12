@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBookApp.PhoneBookReportApi.Services;
+using PhoneBookApp.PhoneBookReportApi.Validations;
 using PhoneBookApp.Shared.ControllerBases;
 
 namespace PhoneBookApp.PhoneBookReportApi.Controllers
@@ -31,5 +32,33 @@ namespace PhoneBookApp.PhoneBookReportApi.Controllers
 
             return CreateActionResultInstance(response);
         }
+
+        [HttpGet("{id}")]
+        [ValidateBsonId]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var response = await _reportService.GetReportByIdAsync(id);
+
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpGet]
+        [Route("/api/[controller]/GetDetailsByReportIdAsync/{id}")]
+        [ValidateBsonId]
+        public async Task<IActionResult> GetDetailsByReportIdAsync(string id)
+        {
+            var response = await _reportService.GetDetailsByReportIdAsync(id);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpGet]
+        [Route("/api/[controller]/GetAllReportDetailAsync")]
+        public async Task<IActionResult> GetAllReportDetailAsync()
+        {
+            var contactInfos = await _reportService.GetAllReportDetailAsync();
+
+            return CreateActionResultInstance(contactInfos);
+        }
+
     }
 }

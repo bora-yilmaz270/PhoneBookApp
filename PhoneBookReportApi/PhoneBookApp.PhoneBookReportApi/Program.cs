@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using PhoneBookApp.PhoneBookReportApi.Consumers;
 using PhoneBookApp.PhoneBookReportApi.Services;
 using PhoneBookApp.PhoneBookReportApi.Settings;
+using PhoneBookApp.Shared.Messages;
 
 namespace PhoneBookApp.PhoneBookReportApi
 {
@@ -43,10 +44,15 @@ namespace PhoneBookApp.PhoneBookReportApi
                         host.Password("guest");
                     });
 
-                    cfg.ReceiveEndpoint("report-detail-event-consumer", e =>
+                    cfg.ReceiveEndpoint("create-reportdetail-service", e =>
                     {
                         e.ConfigureConsumer<ReportDetailEventConsumer>(context);
                     });
+
+                    //cfg.ReceiveEndpoint("report-detail-event-consumer", e =>
+                    //{
+                    //    e.ConfigureConsumer<ReportDetailEventConsumer>(context);
+                    //});
                 });
             });
             var app = builder.Build();

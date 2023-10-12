@@ -29,12 +29,7 @@ namespace PhoneBookApp.PhoneBookApi.Services
             var contacts = await _contactCollection.Find(c => true).ToListAsync();
 
             return Response<List<ContactDto>>.Success(_mapper.Map<List<ContactDto>>(contacts), 200);      
-        }
-        public async Task<Response<ContactDto>> GetContactByIdAsync(string id)
-        {            
-            var contact =await _contactCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-            return Response<ContactDto>.Success(_mapper.Map<ContactDto>(contact), 200);
-        }
+        }     
         public async Task<Response<ContactDetailDto>> GetContactDetailByIdAsync(string id)
         {
             var contact = await _contactCollection.Find(x => x.Id == id).FirstOrDefaultAsync();            
@@ -62,7 +57,7 @@ namespace PhoneBookApp.PhoneBookApi.Services
             }
             else
             {
-                return Response<NoContent>.Fail("Course not found", 404);
+                return Response<NoContent>.Fail("Not found", 404);
             }           
         }              
               

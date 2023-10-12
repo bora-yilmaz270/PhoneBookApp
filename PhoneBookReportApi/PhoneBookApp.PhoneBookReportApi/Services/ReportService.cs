@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
 using PhoneBookApp.PhoneBookReportApi.Dtos;
-//using PhoneBookApp.PhoneBookReportApi.Enums;
 using PhoneBookApp.PhoneBookReportApi.Models;
 using PhoneBookApp.PhoneBookReportApi.Settings;
-using Mass = MassTransit;
 using PhoneBookApp.Shared.Dtos;
-using PhoneBookApp.Shared.Messages;
 using PhoneBookApp.Shared.Enums;
+using PhoneBookApp.Shared.Messages;
+using Mass = MassTransit;
 
 namespace PhoneBookApp.PhoneBookReportApi.Services
 {
@@ -27,14 +26,14 @@ namespace PhoneBookApp.PhoneBookReportApi.Services
             _mapper = mapper;
             _publishEndpoint = publishEndpoint;
         }
+
         public async Task<Response<List<ReportDto>>> GetAllReportsAsync()
         {
-
             var reports = await _reportCollection.Find(c => true).ToListAsync();
 
             return Response<List<ReportDto>>.Success(_mapper.Map<List<ReportDto>>(reports), 200);
-
         }
+
         public async Task<Response<ReportCreateDto>> CreateReportAsync()
         {           
 
@@ -51,14 +50,23 @@ namespace PhoneBookApp.PhoneBookReportApi.Services
 
         }
 
-        public async Task<Report> GetReportByIdAsync(string id)
+        public async Task<Response<ReportDto>> GetReportByIdAsync(string id)
         {
-            return await _reportCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            var report = await _reportCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return Response<ReportDto>.Success(_mapper.Map<ReportDto>(report), 200);           
         }
 
-        public async Task<IList<ReportDetail>> GetDetailsByReportIdAsync(string reportId)
+        public async Task<Response<List<ReportDetailDto>>> GetDetailsByReportIdAsync(string reportId)
         {
-            return await _reportDetailCollection.Find(x => x.ReportId == reportId).ToListAsync();
+            var reportDetailDto = await _reportDetailCollection.Find(x => x.ReportId == reportId).ToListAsync();
+
+            return Response<List<ReportDetailDto>>.Success(_mapper.Map<List<ReportDetailDto>>(reportDetailDto), 200);
+        }
+        public async Task<Response<List<ReportDetailDto>>> GetAllReportDetailAsync()
+        {
+            var reportDetailDto = await _reportDetailCollection.Find(c => true).ToListAsync();
+
+            return Response<List<ReportDetailDto>>.Success(_mapper.Map<List<ReportDetailDto>>(reportDetailDto), 200);
         }
 
         public async Task CreateReportDetailsAsync(IList<ReportDetail> reportDetails)
