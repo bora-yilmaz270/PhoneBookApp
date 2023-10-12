@@ -1,25 +1,27 @@
+
 using MassTransit;
 using Microsoft.Extensions.Options;
-using PhoneBookApp.PhoneBookApi.Consumer;
-using PhoneBookApp.PhoneBookApi.Services;
-using PhoneBookApp.PhoneBookApi.Settings;
+using PhoneBookApp.PhoneBookReportApi.Consumers;
+using PhoneBookApp.PhoneBookReportApi.Services;
+using PhoneBookApp.PhoneBookReportApi.Settings;
 
-namespace PhoneBookApp.PhoneBookApi
+namespace PhoneBookApp.PhoneBookReportApi
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);          
+            var builder = WebApplication.CreateBuilder(args);
+
             // Add services to the container.
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-
             builder.Services.AddSwaggerGen();
- 
-            builder.Services.AddScoped<IContactService, ContactService>();                
-            builder.Services.AddScoped<IContactInfoService, ContactInfoService>();                
+      
+            builder.Services.AddScoped<IReportService, ReportService>();
+            
             builder.Services.AddAutoMapper(typeof(Program));
 
             builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
@@ -31,24 +33,22 @@ namespace PhoneBookApp.PhoneBookApi
 
             builder.Services.AddMassTransit(x =>
             {
-                x.AddConsumer<CreateReportEventConsumer>();
-                // Default Port : 5672
+                x.AddConsumer<ReportDetailEventConsumer>();
+                
                 x.UsingRabbitMq((context, cfg) =>
                 {
-
                     cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
                     {
                         host.Username("guest");
                         host.Password("guest");
                     });
 
-                    cfg.ReceiveEndpoint("create-report-event-consumer", e =>
+                    cfg.ReceiveEndpoint("report-detail-event-consumer", e =>
                     {
-                        e.ConfigureConsumer<CreateReportEventConsumer>(context);
+                        e.ConfigureConsumer<ReportDetailEventConsumer>(context);
                     });
                 });
             });
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

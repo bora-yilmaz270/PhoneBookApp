@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -17,13 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\PhoneBookApp.Shared\PhoneBookApp.Shared.csproj" />
+    <Folder Include="Validations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Consumer\CreateReportEventConsumer.cs">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Compile>
+    <ProjectReference Include="..\..\Shared\PhoneBookApp.Shared\PhoneBookApp.Shared.csproj" />
   </ItemGroup>
 
 </Project>
