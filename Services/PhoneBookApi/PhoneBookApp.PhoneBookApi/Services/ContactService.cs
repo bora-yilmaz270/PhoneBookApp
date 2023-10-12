@@ -11,7 +11,6 @@ namespace PhoneBookApp.PhoneBookApi.Services
     {
         private readonly IMongoCollection<Contact> _contactCollection;
         private readonly IMongoCollection<ContactInfo> _contactInfoCollection;
-
         private readonly IMapper _mapper;
         public ContactService(IMapper mapper, IDatabaseSettings databaseSettings, IContactInfoService contactInfoService)
         {
