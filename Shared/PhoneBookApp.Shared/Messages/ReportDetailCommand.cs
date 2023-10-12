@@ -1,6 +1,6 @@
 ﻿namespace PhoneBookApp.Shared.Messages
 {
-    public class ReportDetailEvent
+    public class ReportDetailCommand
     {
        
         public string ReportId { get; set; }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PhoneBookApp.Shared.Messages
 {
-    public class ListDetailEvent
+    public class ListDetailCommand
     {
-        public List<ReportDetailEvent> ReportDetailEvents { get; set; }
+        public List<ReportDetailCommand> ReportDetailEvents { get; set; }
     }
 }

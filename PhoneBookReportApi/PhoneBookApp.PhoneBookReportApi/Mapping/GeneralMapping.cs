@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.OpenApi.Extensions;
 using PhoneBookApp.PhoneBookReportApi.Dtos;
 using PhoneBookApp.PhoneBookReportApi.Models;
 
@@ -11,7 +12,6 @@ namespace PhoneBookApp.PhoneBookReportApi.Mapping
             CreateMap<Report, ReportDto>().ReverseMap();
             CreateMap<Report, ReportCreateDto>().ReverseMap();
             CreateMap<ReportDetail, ReportDetailDto>().ReverseMap();                  
-
         }
     }
 }

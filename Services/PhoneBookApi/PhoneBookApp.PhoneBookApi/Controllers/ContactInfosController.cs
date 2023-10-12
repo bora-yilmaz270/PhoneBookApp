@@ -38,6 +38,7 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ValidateBsonId]
         public async Task<IActionResult> Delete(string id)
         {
             var response = await _contactInfoService.DeleteContactInfoAsync(id);

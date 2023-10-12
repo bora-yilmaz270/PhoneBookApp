@@ -5,8 +5,8 @@ using PhoneBookApp.PhoneBookApi.Models;
 namespace PhoneBookApp.PhoneBookApi.Dtos
 {
     public class ContactInfoDto
-    {        
-              
+    {
+        public string Id { get; set; }
         public string ContactId { get; set; }
         public string InfoType { get; set; }
         public string Value { get; set; }

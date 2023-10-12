@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PhoneBookApp.PhoneBookApi.Dtos;
 using PhoneBookApp.PhoneBookApi.Services;
+using PhoneBookApp.PhoneBookApi.Validations;
 using PhoneBookApp.Shared.ControllerBases;
 
 namespace PhoneBookApp.PhoneBookApi.Controllers
@@ -26,6 +27,7 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ValidateBsonId]
         public async Task<IActionResult> GetById(string id)
         {
             var contacts = await _contactService.GetContactDetailByIdAsync(id);
@@ -34,6 +36,7 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
         }
 
         [HttpPost]
+        [ValidateName]
         public async Task<IActionResult> Create(ContactCreateDto contactCreateDto)
         {
             var response = await _contactService.CreateContactAsync(contactCreateDto);
@@ -42,6 +45,7 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ValidateBsonId]
         public async Task<IActionResult> Delete(string id)
         {
             var response = await _contactService.DeleteContactAsync(id);

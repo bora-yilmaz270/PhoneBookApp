@@ -15,35 +15,37 @@ namespace PhoneBookApp.PhoneBookApi.Consumer
         private readonly IContactService _contactService;
         private readonly IContactInfoService _contactInfoService;
         private readonly Mass.IPublishEndpoint _publishEndpoint;
-
-        public CreateReportEventConsumer(IContactService contactService, IContactInfoService contactInfoService, IPublishEndpoint publishEndpoint)
+        private readonly ISendEndpointProvider _sendEndpointProvider;
+        public CreateReportEventConsumer(IContactService contactService, IContactInfoService contactInfoService, IPublishEndpoint publishEndpoint, ISendEndpointProvider sendEndpointProvider)
         {
             _contactService = contactService;
             _contactInfoService = contactInfoService;
             _publishEndpoint = publishEndpoint;
+            _sendEndpointProvider = sendEndpointProvider;
         }
 
         public async Task Consume(ConsumeContext<CreateReportEvent> context)
-        {           
+        {
+            var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:create-reportdetail-service"));
 
-            List<ReportDetailEvent> reportDetailEvents = new List<ReportDetailEvent>(); 
+            List<ReportDetailCommand> reportDetailEvents = new List<ReportDetailCommand>();
 
-            var contactInfos = await _contactInfoService.GetAllContactInfosAsync();            
+            var contactInfos = await _contactInfoService.GetAllContactInfosAsync();
 
-            var locations = contactInfos.Data.Where(x => x.InfoType == "Location")?? null;         
+            var locations = contactInfos.Data.Where(x => x.InfoType == "Location") ?? null;
 
-            var distinctLocations = locations.Select(x => x.Value).Distinct();                      
+            var distinctLocations = locations.Select(x => x.Value).Distinct();
 
             foreach (var location in distinctLocations)
             {
-                ReportDetailEvent reportDetailEvent = new ReportDetailEvent();
-                reportDetailEvent.ReportId =  context.Message.Id;
-                
+                ReportDetailCommand reportDetailEvent = new ReportDetailCommand();
+                reportDetailEvent.ReportId = context.Message.Id;
+
                 var contacts = locations
                   .Where(x => x.Value == location)
                   .Select(x => x.ContactId)
                   .Distinct();
-                
+
                 var phoneNumbers = contactInfos.Data
                   .Where(x => x.InfoType == "Phone" && contacts.Contains(x.ContactId))
                   .Select(x => x.Value)
@@ -53,15 +55,57 @@ namespace PhoneBookApp.PhoneBookApi.Consumer
                 reportDetailEvent.ContactCount = contacts.Count();
                 reportDetailEvent.PhoneNumberCount = phoneNumbers;
                 reportDetailEvent.Location = location;
-                reportDetailEvents.Add(reportDetailEvent);               
+                reportDetailEvents.Add(reportDetailEvent);
 
             }
 
-            ListDetailEvent listDetailEvent = new ListDetailEvent();
+            ListDetailCommand listDetailEvent = new ListDetailCommand();
 
-            listDetailEvent.ReportDetailEvents= reportDetailEvents;
+            listDetailEvent.ReportDetailEvents = reportDetailEvents;          
 
-            await _publishEndpoint.Publish<ListDetailEvent>(listDetailEvent);
+            await sendEndpoint.Send<ListDetailCommand>(listDetailEvent);
         }
+
+        //public async Task Consume(ConsumeContext<CreateReportEvent> context)
+        //{           
+
+        //    List<ReportDetailEvent> reportDetailEvents = new List<ReportDetailEvent>(); 
+
+        //    var contactInfos = await _contactInfoService.GetAllContactInfosAsync();            
+
+        //    var locations = contactInfos.Data.Where(x => x.InfoType == "Location")?? null;         
+
+        //    var distinctLocations = locations.Select(x => x.Value).Distinct();                      
+
+        //    foreach (var location in distinctLocations)
+        //    {
+        //        ReportDetailEvent reportDetailEvent = new ReportDetailEvent();
+        //        reportDetailEvent.ReportId =  context.Message.Id;
+
+        //        var contacts = locations
+        //          .Where(x => x.Value == location)
+        //          .Select(x => x.ContactId)
+        //          .Distinct();
+
+        //        var phoneNumbers = contactInfos.Data
+        //          .Where(x => x.InfoType == "Phone" && contacts.Contains(x.ContactId))
+        //          .Select(x => x.Value)
+        //          .Distinct()
+        //        .Count();
+
+        //        reportDetailEvent.ContactCount = contacts.Count();
+        //        reportDetailEvent.PhoneNumberCount = phoneNumbers;
+        //        reportDetailEvent.Location = location;
+        //        reportDetailEvents.Add(reportDetailEvent);               
+
+        //    }
+
+        //    ListDetailEvent listDetailEvent = new ListDetailEvent();
+
+        //    listDetailEvent.ReportDetailEvents= reportDetailEvents;
+
+        //    await _publishEndpoint.Publish<ListDetailEvent>(listDetailEvent);
+        //}
+
     }
 }

@@ -1,7 +1,6 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using PhoneBookApp.Shared.Enums;
-//using PhoneBookApp.PhoneBookReportApi.Enums;
+﻿using PhoneBookApp.Shared.Enums;
+using System.Text.Json.Serialization;
+
 
 namespace PhoneBookApp.PhoneBookReportApi.Dtos
 {
@@ -10,6 +9,9 @@ namespace PhoneBookApp.PhoneBookReportApi.Dtos
         public string Id { get; set; }
         public DateTime CreatedDate { get; set; }       
         public DateTime? CompletedDate { get; set; }
+        [JsonIgnore]
         public ReportStatus Status { get; set; }
+
+        public string StatusText => Status.ToText();
     }
 }

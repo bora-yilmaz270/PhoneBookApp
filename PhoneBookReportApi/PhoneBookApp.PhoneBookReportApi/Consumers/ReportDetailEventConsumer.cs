@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace PhoneBookApp.PhoneBookReportApi.Consumers
 {
-    public class ReportDetailEventConsumer : IConsumer<ListDetailEvent> //değişti
+    public class ReportDetailEventConsumer : IConsumer<ListDetailCommand> 
     {
         private readonly IReportService _reportService;
 
@@ -19,7 +19,7 @@ namespace PhoneBookApp.PhoneBookReportApi.Consumers
             _reportService = reportService;
         }
 
-        public async Task Consume(ConsumeContext<ListDetailEvent> context) //değişti
+        public async Task Consume(ConsumeContext<ListDetailCommand> context) 
         {
             var details = context.Message.ReportDetailEvents
        .Select(x => new ReportDetail(x.ReportId, x.Location, x.ContactCount, x.PhoneNumberCount))

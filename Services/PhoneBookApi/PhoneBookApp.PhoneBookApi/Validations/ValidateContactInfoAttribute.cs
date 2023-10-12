@@ -37,8 +37,7 @@ namespace PhoneBookApp.PhoneBookApi.Validations
             }
 
             base.OnActionExecuting(context);
-        }
-              
+        }              
         private bool IsValidInfoType(string infoType)
         {
             return infoType == "Phone" || infoType == "Email" || infoType == "Location";

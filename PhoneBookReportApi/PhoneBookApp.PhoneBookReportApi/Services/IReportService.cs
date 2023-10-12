@@ -8,8 +8,9 @@ namespace PhoneBookApp.PhoneBookReportApi.Services
     {
         Task<Response<ReportCreateDto>> CreateReportAsync();
         Task<Response<List<ReportDto>>> GetAllReportsAsync();
-        Task<Report> GetReportByIdAsync(string id);       
-        Task<IList<ReportDetail>> GetDetailsByReportIdAsync(string reportId);
+        Task<Response<ReportDto>> GetReportByIdAsync(string id);
+        Task<Response<List<ReportDetailDto>>> GetDetailsByReportIdAsync(string reportId);
+        Task<Response<List<ReportDetailDto>>> GetAllReportDetailAsync();
         Task CreateReportDetailsAsync(IList<ReportDetail> reportDetails);
         Task ReportCompletedAsync(string id);
     }

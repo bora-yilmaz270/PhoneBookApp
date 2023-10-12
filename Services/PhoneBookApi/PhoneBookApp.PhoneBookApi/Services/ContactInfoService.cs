@@ -20,12 +20,7 @@ namespace PhoneBookApp.PhoneBookApi.Services
             _contactInfoCollection = db.GetCollection<ContactInfo>(databaseSettings.ContactInfoCollectionName);
 
             _mapper = mapper;
-        }
-        public async Task<Response<List<ContactInfoDto>>> GetContactInfosByContactIdAsync(string contactId)
-        {
-            var contactInfo = await _contactInfoCollection.Find(x => x.ContactId == contactId).ToListAsync();
-            return Response<List<ContactInfoDto>>.Success(_mapper.Map<List<ContactInfoDto>>(contactInfo), 200);
-        }
+        }     
         public async Task<Response<List<ContactInfoDto>>> GetAllContactInfosAsync()
         {
 
@@ -55,7 +50,7 @@ namespace PhoneBookApp.PhoneBookApi.Services
             }
             else
             {
-                return Response<NoContent>.Fail("Course not found", 404);
+                return Response<NoContent>.Fail("Not found", 404);
             }
         }
     }
