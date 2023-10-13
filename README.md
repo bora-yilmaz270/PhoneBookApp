@@ -41,8 +41,8 @@
 
 
 
-                                                      PhoneBookApi
-                                    
+                                               PhoneBookApi
+
                                     Contacts
                                     GET https://localhost:7066/api/Contacts
                                     POST https://localhost:7066/api/Contacts
@@ -74,7 +74,21 @@
                                     infoType	string
                                     
                                     Value	string
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    PhoneBookReportApi
+                                    
+                                    GET https://localhost:7260/api/Report
+                                    POST https://localhost:7260/api/Report
+                                    GET https://localhost:7260/api/Report/{id}
+                                    GEThttps://localhost:7260/api/Report/GetDetailsByReportIdAsync/{id}
+                                    GET https://localhost:7260/api/Report/GetAllReportDetailAsync
 
 
 
+                           
                                                      
