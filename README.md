@@ -37,4 +37,44 @@
                     • UUID
                     • Raporun Talep Edildiği Tarih
                     • Rapor Durumu (Hazırlanıyor, Tamamlandı)
+
+
+
+
+                                                      PhoneBookApi
+                                    
+                                    Contacts
+                                    GET https://localhost:7066/api/Contacts
+                                    POST https://localhost:7066/api/Contacts
+                                    GET https://localhost:7066/api/Contacts/{id}
+                                    DELETE https://localhost:7066/api/Contacts/{id}
+                                    
+                                    
+                                    ContactInfos
+                                    GET https://localhost:7066/api/ContactInfos
+                                    POST https://localhost:7066/api/ContactInfos
+                                    DELETE https://localhost:7066/api/ContactInfos/{id}
+                                    
+                                    
+                                    POST https://localhost:7066/api/Contacts
+                                    ContactCreateDto:
+                                    
+                                    name	string
+                                    
+                                    lastName	string
+                                    
+                                    company	string
+                                    
+                                    
+                                    POST https://localhost:7066/api/ContactInfos
+                                    ContactInfoCreateDto:
+                                    
+                                    contactId	string
+                                    
+                                    infoType	string
+                                    
+                                    Value	string
+
+
+
                                                      
