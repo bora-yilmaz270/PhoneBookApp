@@ -25,7 +25,10 @@ namespace PhoneBookApp.PhoneBookApi.Services
         {
 
             var contactInfos = await _contactInfoCollection.Find(c => true).ToListAsync();
-
+            if (contactInfos==null)
+            {
+                return Response<List<ContactInfoDto>>.Fail("Not found", 404);
+            }
             return Response<List<ContactInfoDto>>.Success(_mapper.Map<List<ContactInfoDto>>(contactInfos), 200);
 
 

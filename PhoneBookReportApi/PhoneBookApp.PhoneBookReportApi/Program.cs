@@ -23,7 +23,7 @@ namespace PhoneBookApp.PhoneBookReportApi
       
             builder.Services.AddScoped<IReportService, ReportService>();
             
-            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 

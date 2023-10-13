@@ -35,7 +35,13 @@ namespace PhoneBookApp.PhoneBookApi.Services
             var contact = await _contactCollection.Find(x => x.Id == id).FirstOrDefaultAsync();            
                  contact.ContactInfos = await _contactInfoCollection.Find(x => x.ContactId == id).ToListAsync();
 
+            if (contact==null)
+            {
+                return Response<ContactDetailDto>.Fail("Not found", 404);
+            }
+
             return Response<ContactDetailDto>.Success(_mapper.Map<ContactDetailDto>(contact), 200);
+
         }
         public async Task<Response<ContactCreateDto>> CreateContactAsync(ContactCreateDto contactDto)
         {

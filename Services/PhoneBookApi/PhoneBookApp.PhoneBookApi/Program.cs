@@ -20,7 +20,7 @@ namespace PhoneBookApp.PhoneBookApi
  
             builder.Services.AddScoped<IContactService, ContactService>();                
             builder.Services.AddScoped<IContactInfoService, ContactInfoService>();                
-            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
