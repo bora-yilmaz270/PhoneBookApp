@@ -1,4 +1,5 @@
-#PhoneBookApp
+<H2>#PhoneBookApp</H2>
+<br>
 Senaryo
 Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapı tasarlayarak, basit 
 bir telefon rehberi uygulaması oluşturulması sağlanacaktır.
@@ -41,19 +42,16 @@ Veri yapısı olarak da:<br>
 HTTP İSTEKLERİ
 <HR/>
 PhoneBookApi<br>
-
 Contacts
 GET https://localhost:7066/api/Contacts<br>
 POST https://localhost:7066/api/Contacts<br>
 GET https://localhost:7066/api/Contacts/{id}<br>
 DELETE https://localhost:7066/api/Contacts/{id}<br>
 <br>
-
 ContactInfos
 GET https://localhost:7066/api/ContactInfos<br>
 POST https://localhost:7066/api/ContactInfos<br>
 DELETE https://localhost:7066/api/ContactInfos/{id}<br>
-
 <br>
 POST https://localhost:7066/api/Contacts
 ContactCreateDto:<br>
