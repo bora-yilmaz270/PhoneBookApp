@@ -3,57 +3,57 @@ Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapı tasarla
 bir telefon rehberi uygulaması oluşturulması sağlanacaktır.
 Beklenen işlevler:
 <br>
-• Rehberde kişi oluşturma
-• Rehberde kişi kaldırma
-• Rehberdeki kişiye iletişim bilgisi ekleme
-• Rehberdeki kişiden iletişim bilgisi kaldırma
-• Rehberdeki kişilerin listelenmesi
+• Rehberde kişi oluşturma<br>
+• Rehberde kişi kaldırma<br>
+• Rehberdeki kişiye iletişim bilgisi ekleme<br>
+• Rehberdeki kişiden iletişim bilgisi kaldırma<br>
+• Rehberdeki kişilerin listelenmesi<br>
 • Rehberdeki bir kişiyle ilgili iletişim bilgilerinin de yer aldığı detay bilgilerin 
-getirilmesi
+getirilmesi<br>
 • Rehberdeki kişilerin bulundukları konuma göre istatistiklerini çıkartan bir rapor 
-talebi
-• Sistemin oluşturduğu raporların listelenmesi
-• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi
+talebi<br>
+• Sistemin oluşturduğu raporların listelenmesi<br>
+• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi<br>
 Teknik Tasarım
 Kişiler: Sistemde teorik anlamda sınırsız sayıda kişi kaydı yapılabilecektir. Her kişiye 
 bağlı iletişim bilgileri de yine sınırsız bir biçimde eklenebilmelidir.
 Karşılanması beklenen veri yapısındaki gerekli alanlar aşağıdaki gibidir:
-• UUID
-• Ad
-• Soyad
-• Firma
-• İletişim Bilgisi
-o Bilgi Tipi: Telefon Numarası, E-mail Adresi, Konum
-o Bilgi İçeriği
+• UUID<br>
+• Ad<br>
+• Soyad<br>
+• Firma<br>
+• İletişim Bilgisi<br>
+o Bilgi Tipi: Telefon Numarası, E-mail Adresi, Konum<br>
+o Bilgi İçeriği<br>
 Rapor: Rapor talepleri asenkron çalışacaktır. Kullanıcı bir rapor talep ettiğinde, sistem 
 arkaplanda bu çalışmayı darboğaz yaratmadan sıralı bir biçimde ele alacak; rapor 
 tamamlandığında ise kullanıcının "raporların listelendiği" endpoint üzerinden raporun 
-durumunu "tamamlandı" olarak gözlemleyebilmesi gerekmektedir.
-Rapor basitçe aşağıdaki bilgileri içerecektir:
-• Konum Bilgisi
-• O konumda yer alan rehbere kayıtlı kişi sayısı
-• O konumda yer alan rehbere kayıtlı telefon numarası sayısı
-Veri yapısı olarak da:
-• UUID
-• Raporun Talep Edildiği Tarih
-• Rapor Durumu (Hazırlanıyor, Tamamlandı)
+durumunu "tamamlandı" olarak gözlemleyebilmesi gerekmektedir.<br>
+Rapor basitçe aşağıdaki bilgileri içerecektir:<br>
+• Konum Bilgisi<br>
+• O konumda yer alan rehbere kayıtlı kişi sayısı<br>
+• O konumda yer alan rehbere kayıtlı telefon numarası sayısı<br>
+Veri yapısı olarak da:<br>
+• UUID<br>
+• Raporun Talep Edildiği Tarih<br>
+• Rapor Durumu (Hazırlanıyor, Tamamlandı)<br>
 
 
-PhoneBookApi
+PhoneBookApi<br>
 
 Contacts
 GET https://localhost:7066/api/Contacts
 POST https://localhost:7066/api/Contacts
 GET https://localhost:7066/api/Contacts/{id}
 DELETE https://localhost:7066/api/Contacts/{id}
-
+<br>
 
 ContactInfos
 GET https://localhost:7066/api/ContactInfos
 POST https://localhost:7066/api/ContactInfos
 DELETE https://localhost:7066/api/ContactInfos/{id}
 
-
+<br>
 POST https://localhost:7066/api/Contacts
 ContactCreateDto:
 
