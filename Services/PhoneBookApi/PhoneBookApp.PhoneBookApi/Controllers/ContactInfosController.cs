@@ -30,8 +30,6 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
         [ValidateContactInfo]
         public async Task<IActionResult> Create([FromBody] ContactInfoCreateDto contactInfoCreateDto)
         {
-
-
             var response = await _contactInfoService.CreateContactInfoAsync(contactInfoCreateDto);
 
             return CreateActionResultInstance(response);
