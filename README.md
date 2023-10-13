@@ -37,8 +37,8 @@ Veri yapısı olarak da:<br>
 • UUID<br>
 • Raporun Talep Edildiği Tarih<br>
 • Rapor Durumu (Hazırlanıyor, Tamamlandı)<br>
-
-
+HTTP İSTEKLERİ
+<HR/>
 PhoneBookApi<br>
 
 Contacts
@@ -82,6 +82,6 @@ PhoneBookReportApi
 
 GET https://localhost:7260/api/Report<br>
 POST https://localhost:7260/api/Report<br>
-GET https://localhost:7260/api/Report/{id}
-GEThttps://localhost:7260/api/Report/GetDetailsByReportIdAsync/{id}
+GET https://localhost:7260/api/Report/{id}<br>
+GEThttps://localhost:7260/api/Report/GetDetailsByReportIdAsync/{id}<br>
 GET https://localhost:7260/api/Report/GetAllReportDetailAsync<br>
