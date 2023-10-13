@@ -39,6 +39,7 @@ Veri yapısı olarak da:<br>
 • UUID<br>
 • Raporun Talep Edildiği Tarih<br>
 • Rapor Durumu (Hazırlanıyor, Tamamlandı)<br>
+<br>
 HTTP İSTEKLERİ
 <HR/>
 PhoneBookApi<br>
