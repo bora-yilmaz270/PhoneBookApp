@@ -19,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBookApp.PhoneBookRepor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{95319E02-2CEB-4706-9A4D-32D7DD2BC0BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookApi.UnitTest", "PhoneBookApi\Test\PhoneBookApi.UnitTest\PhoneBookApi.UnitTest.csproj", "{73940D26-D2BB-485F-9858-62B36C08877E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBookApi.UnitTest", "PhoneBookApi\Test\PhoneBookApi.UnitTest\PhoneBookApi.UnitTest.csproj", "{73940D26-D2BB-485F-9858-62B36C08877E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{CD80DE11-FA49-426E-960C-433F04DB3BAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookReportApi.UnitTest", "PhoneBookReportApi\Test\PhoneBookReportApi.UnitTest\PhoneBookReportApi.UnitTest.csproj", "{CA098665-F64F-449A-B679-4793881943F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{73940D26-D2BB-485F-9858-62B36C08877E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73940D26-D2BB-485F-9858-62B36C08877E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73940D26-D2BB-485F-9858-62B36C08877E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA098665-F64F-449A-B679-4793881943F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA098665-F64F-449A-B679-4793881943F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA098665-F64F-449A-B679-4793881943F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA098665-F64F-449A-B679-4793881943F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,8 @@ Global
 		{E1FB1BD9-2275-4282-8019-260EF32EAD44} = {981E132E-ECAF-49C0-8C23-B82381520542}
 		{95319E02-2CEB-4706-9A4D-32D7DD2BC0BC} = {98E46663-B456-4AC3-A5DE-B44F41E60E98}
 		{73940D26-D2BB-485F-9858-62B36C08877E} = {95319E02-2CEB-4706-9A4D-32D7DD2BC0BC}
+		{CD80DE11-FA49-426E-960C-433F04DB3BAB} = {981E132E-ECAF-49C0-8C23-B82381520542}
+		{CA098665-F64F-449A-B679-4793881943F9} = {CD80DE11-FA49-426E-960C-433F04DB3BAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0A40A9A-621A-424D-B9C5-B77CC7E102D0}
