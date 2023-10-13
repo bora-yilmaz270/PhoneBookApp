@@ -42,20 +42,20 @@ Veri yapısı olarak da:<br>
 PhoneBookApi<br>
 
 Contacts
-GET https://localhost:7066/api/Contacts
-POST https://localhost:7066/api/Contacts
-GET https://localhost:7066/api/Contacts/{id}
-DELETE https://localhost:7066/api/Contacts/{id}
+GET https://localhost:7066/api/Contacts<br>
+POST https://localhost:7066/api/Contacts<br>
+GET https://localhost:7066/api/Contacts/{id}<br>
+DELETE https://localhost:7066/api/Contacts/{id}<br>
 <br>
 
 ContactInfos
-GET https://localhost:7066/api/ContactInfos
-POST https://localhost:7066/api/ContactInfos
-DELETE https://localhost:7066/api/ContactInfos/{id}
+GET https://localhost:7066/api/ContactInfos<br>
+POST https://localhost:7066/api/ContactInfos<br>
+DELETE https://localhost:7066/api/ContactInfos/{id}<br>
 
 <br>
 POST https://localhost:7066/api/Contacts
-ContactCreateDto:
+ContactCreateDto:<br>
 
 name	string
 
@@ -65,7 +65,7 @@ company	string
 
 
 POST https://localhost:7066/api/ContactInfos
-ContactInfoCreateDto:
+ContactInfoCreateDto:<br>
 
 contactId	string
 
@@ -80,8 +80,8 @@ Value	string
 
 PhoneBookReportApi
 
-GET https://localhost:7260/api/Report
-POST https://localhost:7260/api/Report
+GET https://localhost:7260/api/Report<br>
+POST https://localhost:7260/api/Report<br>
 GET https://localhost:7260/api/Report/{id}
 GEThttps://localhost:7260/api/Report/GetDetailsByReportIdAsync/{id}
-GET https://localhost:7260/api/Report/GetAllReportDetailAsync
+GET https://localhost:7260/api/Report/GetAllReportDetailAsync<br>
