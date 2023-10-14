@@ -1,6 +1,4 @@
-using MassTransit;
 using Microsoft.Extensions.Options;
-using PhoneBookApp.PhoneBookApi.Consumer;
 using PhoneBookApp.PhoneBookApi.Services;
 using PhoneBookApp.PhoneBookApi.Settings;
 
@@ -27,27 +25,7 @@ namespace PhoneBookApp.PhoneBookApi
             builder.Services.AddSingleton<IDatabaseSettings>(sp =>
             {
                 return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-            });
-
-            builder.Services.AddMassTransit(x =>
-            {
-                x.AddConsumer<CreateReportEventConsumer>();
-                // Default Port : 5672
-                x.UsingRabbitMq((context, cfg) =>
-                {
-
-                    cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
-                    {
-                        host.Username("guest");
-                        host.Password("guest");
-                    });
-
-                    cfg.ReceiveEndpoint("create-report-event-consumer", e =>
-                    {
-                        e.ConfigureConsumer<CreateReportEventConsumer>(context);
-                    });
-                });
-            });
+            });          
 
             var app = builder.Build();
 
