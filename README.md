@@ -40,7 +40,34 @@ Veri yapısı olarak da:<br>
 • Raporun Talep Edildiği Tarih<br>
 • Rapor Durumu (Hazırlanıyor, Tamamlandı)<br>
 <br>
-HTTP İSTEKLERİ
+###Nasıl Çalıştırılır
+PhoneBookApp uygulamasının çalıştırılması için aşağıdaki adımları takip edin:
+
+####1. Projeyi Kopyalayın
+İlk olarak, projeyi yerel bilgisayarınıza kopyalamak için GitHub'dan klonlayın:
+
+>> gh repo clone bora-yilmaz270/PhoneBookApp
+
+####2. Docker Kurulumu
+<p>Kurulum için gerekli olan dosyalar docker.com adresinden indirilir ve işletim sistemine göre kurulum yapılır.</p>
+
+####3. Mongo Db   
+<p>Docker hub üzerinden (https://hub.docker.com/_/mongo)  adresinde verilen ilgili kurulum komutlarını kullanarak mongo db image’ını indirip container olarak çalıştırabilirsiniz. </p>
+>> docker pull mongo 
+>>docker run --name some-mongo -d mongo:tag
+
+####4. RabbitMQ 
+<p>Docker hub üzerinden (https://hub.docker.com/_/rabbitmq) adresinde verilen ilgili kurulum komutlarını kullanarak Rabbitmq image’ını indirip container olarak çalıştabilirsiniz. </p>
+>>docker pull rabbitmq
+>> docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost rabbitmq:3-management
+
+<p>
+İlgili kurulumlar tamamlandıktan sonra projeyi VS ortamında çalıştırabilirsiniz.
+Not: Docker arayüzden mongo db ve rabbitmq container’ların çalıştığını kontrol edebilirsiniz.
+</p>
+
+<br>
+###HTTP İSTEKLERİ
 <HR/>
 PhoneBookApi<br>
 Contacts
