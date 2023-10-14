@@ -40,34 +40,37 @@ Veri yapısı olarak da:<br>
 • Raporun Talep Edildiği Tarih<br>
 • Rapor Durumu (Hazırlanıyor, Tamamlandı)<br>
 <br>
-###Nasıl Çalıştırılır
+<h3>Nasıl Çalıştırılır</h3>
+<br>
 PhoneBookApp uygulamasının çalıştırılması için aşağıdaki adımları takip edin:
-
-####1. Projeyi Kopyalayın
+<br>
+<h4>1. Projeyi Kopyalayın</h4>
+<br>
 İlk olarak, projeyi yerel bilgisayarınıza kopyalamak için GitHub'dan klonlayın:
 
 >> gh repo clone bora-yilmaz270/PhoneBookApp
-
-####2. Docker Kurulumu
+<br>
+<h4>2. Docker Kurulumu</h4>
+<br>
 <p>Kurulum için gerekli olan dosyalar docker.com adresinden indirilir ve işletim sistemine göre kurulum yapılır.</p>
-
-####3. Mongo Db   
+<br>
+<h4>3. Mongo Db</h4>   
 <p>Docker hub üzerinden (https://hub.docker.com/_/mongo)  adresinde verilen ilgili kurulum komutlarını kullanarak mongo db image’ını indirip container olarak çalıştırabilirsiniz. </p>
->> docker pull mongo 
->>docker run --name some-mongo -d mongo:tag
-
+>> docker pull mongo <br>
+>>docker run --name some-mongo -d mongo:tag<br>
+<br>
 ####4. RabbitMQ 
 <p>Docker hub üzerinden (https://hub.docker.com/_/rabbitmq) adresinde verilen ilgili kurulum komutlarını kullanarak Rabbitmq image’ını indirip container olarak çalıştabilirsiniz. </p>
->>docker pull rabbitmq
->> docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost rabbitmq:3-management
+>>docker pull rabbitmq <br>
+>> docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost rabbitmq:3-management<br>
 
 <p>
-İlgili kurulumlar tamamlandıktan sonra projeyi VS ortamında çalıştırabilirsiniz.
+İlgili kurulumlar tamamlandıktan sonra projeyi VS ortamında çalıştırabilirsiniz.<br>
 Not: Docker arayüzden mongo db ve rabbitmq container’ların çalıştığını kontrol edebilirsiniz.
 </p>
 
 <br>
-###HTTP İSTEKLERİ
+<h3>HTTP İSTEKLERİ</h3>
 <HR/>
 PhoneBookApi<br>
 Contacts
