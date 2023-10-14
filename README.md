@@ -59,7 +59,7 @@ PhoneBookApp uygulamasının çalıştırılması için aşağıdaki adımları 
 >> docker pull mongo <br>
 >>docker run --name some-mongo -d mongo:tag<br>
 <br>
-####4. RabbitMQ 
+<h4>4. RabbitMQ </h4>
 <p>Docker hub üzerinden (https://hub.docker.com/_/rabbitmq) adresinde verilen ilgili kurulum komutlarını kullanarak Rabbitmq image’ını indirip container olarak çalıştabilirsiniz. </p>
 >>docker pull rabbitmq <br>
 >> docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost rabbitmq:3-management<br>
