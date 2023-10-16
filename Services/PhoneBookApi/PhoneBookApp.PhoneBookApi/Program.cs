@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.Extensions.Options;
 using PhoneBookApp.PhoneBookApi.Services;
 using PhoneBookApp.PhoneBookApi.Settings;
@@ -25,8 +26,19 @@ namespace PhoneBookApp.PhoneBookApi
             builder.Services.AddSingleton<IDatabaseSettings>(sp =>
             {
                 return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-            });          
+            });
 
+            builder.Services.AddMassTransit(x =>
+            {  
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+                    {
+                        host.Username("guest");
+                        host.Password("guest");
+                    });                   
+                });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

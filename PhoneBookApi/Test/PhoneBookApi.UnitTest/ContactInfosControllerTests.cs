@@ -175,6 +175,22 @@ namespace PhoneBookApi.UnitTest
             Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
         }
 
+        [Fact]
+        public async Task Create_ReportBy_Id_OK()
+        {
+            //Arrange
+            _contactInfoServiceMock.Setup(x => x.CreateReportAsync(It.IsAny<string>()))
+            .Returns(Task.FromResult(FakeReportIdContact("6526f3f12e2a1937aaf17139")));          
+
+            //Act
+            var actionResult = await _ContactInfosControllerController.CreateReportByIdAsync("6526f3f12e2a1937aaf17139");
+
+            //Assert
+            var objectResult = (ObjectResult)actionResult;
+
+            Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.OK);
+        }
+
         private PhoneBookApp.Shared.Dtos.Response<List<ContactInfoDto>> GetAllContactInfoByContactId(bool IsExsist)
         {
            
@@ -225,6 +241,19 @@ namespace PhoneBookApi.UnitTest
             if (id == findfakeid)
             {
                 return PhoneBookApp.Shared.Dtos.Response<NoContent>.Success(204);
+            }
+            else
+            {
+                return PhoneBookApp.Shared.Dtos.Response<NoContent>.Fail("Not found", 404);
+            }
+        }
+        private PhoneBookApp.Shared.Dtos.Response<NoContent> FakeReportIdContact(string id)
+        {
+            string findfakeid = "6526f3f12e2a1937aaf17139";
+
+            if (id == findfakeid)
+            {
+                return PhoneBookApp.Shared.Dtos.Response<NoContent>.Success(200);
             }
             else
             {

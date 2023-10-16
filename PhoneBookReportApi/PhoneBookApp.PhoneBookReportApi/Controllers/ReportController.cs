@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using PhoneBookApp.PhoneBookReportApi.Models.Responses;
 using PhoneBookApp.PhoneBookReportApi.Services;
 using PhoneBookApp.PhoneBookReportApi.Validations;
 using PhoneBookApp.Shared.ControllerBases;
+using RestSharp;
 
 namespace PhoneBookApp.PhoneBookReportApi.Controllers
 {
@@ -28,7 +31,13 @@ namespace PhoneBookApp.PhoneBookReportApi.Controllers
         [HttpPost]      
         public async Task<IActionResult> Create()
         {
-            var response = await _reportService.CreateReportAsync();
+            var response = await _reportService.CreateReportAsync();           
+
+            var client = new RestClient("https://localhost:7066");
+
+            var request = new RestRequest("api/ContactInfos/CreateReportByIdAsync/"+response.Data.Id);
+
+            var contactInfosResponse = client.ExecuteGet(request);            
 
             return CreateActionResultInstance(response);
         }

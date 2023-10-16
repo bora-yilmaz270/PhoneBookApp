@@ -44,6 +44,15 @@ namespace PhoneBookApp.PhoneBookApi.Controllers
             return CreateActionResultInstance(response);
         }
 
+        [HttpGet]
+        [Route("/api/[controller]/CreateReportByIdAsync/{id}")]
+        [ValidateBsonId]
+        public async Task<IActionResult> CreateReportByIdAsync(string id)
+        {
 
+            var response= await _contactInfoService.CreateReportAsync(id);
+
+            return CreateActionResultInstance(response);
+        }
     }
 }

@@ -34,20 +34,20 @@ namespace PhoneBookApp.PhoneBookReportApi
 
             builder.Services.AddMassTransit(x =>
             {
-                //x.AddConsumer<ReportDetailEventConsumer>();
-                x.AddConsumer<CreateReportEventConsumer>();
+                x.AddConsumer<ReportDetailEventConsumer>();
+
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
                     {
                         host.Username("guest");
                         host.Password("guest");
-                    });                   
-                    cfg.ReceiveEndpoint("create-report-event-consumer", e =>
-                    {
-                        e.ConfigureConsumer<CreateReportEventConsumer>(context);
                     });
-                   
+
+                    cfg.ReceiveEndpoint("create-reportdetail-service", e =>
+                    {
+                        e.ConfigureConsumer<ReportDetailEventConsumer>(context);
+                    });                   
                 });
             });
             var app = builder.Build();
