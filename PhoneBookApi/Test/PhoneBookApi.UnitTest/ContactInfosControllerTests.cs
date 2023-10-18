@@ -143,7 +143,6 @@ namespace PhoneBookApi.UnitTest
             Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.BadRequest);
          
         }
-
         [Fact]
         public async Task Delete_Contact_OK()
         {
@@ -174,7 +173,21 @@ namespace PhoneBookApi.UnitTest
 
             Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
         }
+        [Fact]
+        public async Task Delete_Contact_Not_OK2()
+        {    //id is null
+            //Arrange
+            _contactInfoServiceMock.Setup(x => x.DeleteContactInfoAsync(It.IsAny<string>()))
+              .Returns(Task.FromResult(FakeDeleteContact("")));
 
+            //Act
+            var actionResult = await _ContactInfosControllerController.Delete("");
+
+            //Assert
+            var objectResult = (ObjectResult)actionResult;
+
+            Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
+        }
         [Fact]
         public async Task Create_ReportBy_Id_OK()
         {
@@ -189,6 +202,36 @@ namespace PhoneBookApi.UnitTest
             var objectResult = (ObjectResult)actionResult;
 
             Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.OK);
+        }
+        [Fact]
+        public async Task Create_ReportBy_Id_Not_OK()
+        {
+            //Arrange
+            _contactInfoServiceMock.Setup(x => x.CreateReportAsync(It.IsAny<string>()))
+            .Returns(Task.FromResult(FakeReportIdContact("")));
+
+            //Act
+            var actionResult = await _ContactInfosControllerController.CreateReportByIdAsync("");
+
+            //Assert
+            var objectResult = (ObjectResult)actionResult;
+
+            Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
+        }
+        [Fact]
+        public async Task Create_ReportBy_Id_Not_OK2()
+        {    //not valid id 
+            //Arrange
+            _contactInfoServiceMock.Setup(x => x.CreateReportAsync(It.IsAny<string>()))
+            .Returns(Task.FromResult(FakeReportIdContact("13322")));
+
+            //Act
+            var actionResult = await _ContactInfosControllerController.CreateReportByIdAsync("13322");
+
+            //Assert
+            var objectResult = (ObjectResult)actionResult;
+
+            Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
         }
 
         private PhoneBookApp.Shared.Dtos.Response<List<ContactInfoDto>> GetAllContactInfoByContactId(bool IsExsist)
@@ -222,7 +265,6 @@ namespace PhoneBookApi.UnitTest
             return PhoneBookApp.Shared.Dtos.Response<List<ContactInfoDto>>.Fail("Not found", 404);
 
         }
-
         private PhoneBookApp.Shared.Dtos.Response<ContactInfoCreateDto> CreateContactInfoForPhoneAndContactIdAsyncFake(ContactInfoCreateDto contactInfoDto)
         {
             string fakecontactId = "6528548f431a5559979c38c3";

@@ -80,6 +80,24 @@ namespace PhoneBookApi.UnitTest
         }
 
         [Fact]
+        public async Task Get_Contact_By_Id_Not_Found2()
+        {    // id is null
+            //Arrange
+            var fakeContactId = "";
+
+            _contactServiceMock.Setup(x => x.GetContactDetailByIdAsync(It.IsAny<string>()))
+              .Returns(Task.FromResult(GetDetailByIdFake2(fakeContactId)));
+
+            //Act
+            var actionResult = await _contactController.GetById(fakeContactId);
+
+            //Assert
+            var objectResult = (ObjectResult)actionResult;
+
+            Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
+        }
+
+        [Fact]
         public async Task Create_Contact_Created()
         {
             //Arrange
@@ -162,6 +180,22 @@ namespace PhoneBookApi.UnitTest
             Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
         }
 
+        [Fact]
+        public async Task Delete_Contact_Not_OK2()
+        {    //id is null
+            //Arrange
+            _contactServiceMock.Setup(x => x.DeleteContactAsync(It.IsAny<string>()))
+              .Returns(Task.FromResult(FakeDeleteContact("")));
+
+            //Act
+            var actionResult = await _contactController.Delete("");
+
+            //Assert
+            var objectResult = (ObjectResult)actionResult;
+
+            Assert.Equal(objectResult.StatusCode, (int)System.Net.HttpStatusCode.NotFound);
+        }
+
         private PhoneBookApp.Shared.Dtos.Response<List<ContactDto>> GetContactsFake()
         {
             List<ContactDto> contacts = new List<ContactDto>();
@@ -216,6 +250,10 @@ namespace PhoneBookApi.UnitTest
             }
             return PhoneBookApp.Shared.Dtos.Response<ContactDetailDto>.Fail("Not found", 404);
 
+        }
+        private PhoneBookApp.Shared.Dtos.Response<ContactDetailDto> GetDetailByIdFake2(string id)
+        {          
+           return PhoneBookApp.Shared.Dtos.Response<ContactDetailDto>.Fail("Not found", 404);
         }
         private PhoneBookApp.Shared.Dtos.Response<ContactCreateDto> FakeCreateMethod(ContactCreateDto contactDto)
         {
