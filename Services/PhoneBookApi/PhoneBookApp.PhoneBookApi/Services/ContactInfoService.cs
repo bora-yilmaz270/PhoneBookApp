@@ -48,6 +48,11 @@ namespace PhoneBookApp.PhoneBookApi.Services
         }
         public async Task<Shared.Dtos.Response<NoContent>> DeleteContactInfoAsync(string id)
         {
+            if (id is null)
+            {
+                return Shared.Dtos.Response<NoContent>.Fail("Not found", 404);
+
+            }
 
             var result = await _contactInfoCollection.DeleteOneAsync(x => x.Id == id);
 
@@ -62,6 +67,11 @@ namespace PhoneBookApp.PhoneBookApi.Services
         }
         public  async Task<Shared.Dtos.Response<NoContent>> CreateReportAsync(string Id)
         {
+            if (Id is null)
+            {
+                return Shared.Dtos.Response<NoContent>.Fail("Not found", 404);
+            }
+
             var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("queue:create-reportdetail-service"));
 
             List<ReportDetailCommand> reportDetailEvents = new List<ReportDetailCommand>();

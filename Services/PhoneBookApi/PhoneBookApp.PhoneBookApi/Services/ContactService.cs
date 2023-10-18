@@ -32,6 +32,10 @@ namespace PhoneBookApp.PhoneBookApi.Services
         }     
         public async Task<Response<ContactDetailDto>> GetContactDetailByIdAsync(string id)
         {
+            if (id is null)
+            {
+                return Response<ContactDetailDto>.Fail("Not found", 404);
+            }
             var contact = await _contactCollection.Find(x => x.Id == id).FirstOrDefaultAsync();            
                  contact.ContactInfos = await _contactInfoCollection.Find(x => x.ContactId == id).ToListAsync();
 
@@ -54,7 +58,11 @@ namespace PhoneBookApp.PhoneBookApi.Services
         }
         public async Task<Response<NoContent>> DeleteContactAsync(string id)
         {
+            if (id is null)
+            {
+                return Shared.Dtos.Response<NoContent>.Fail("Not found", 404);
 
+            }
             var result = await _contactCollection.DeleteOneAsync(x => x.Id == id);
 
             if (result.DeletedCount > 0)
