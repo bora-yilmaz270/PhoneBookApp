@@ -1,117 +1,79 @@
-<H2>#PhoneBookApp</H2>
-<br>
-Senaryo
-Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapı tasarlayarak, basit 
-bir telefon rehberi uygulaması oluşturulması sağlanacaktır.
-Beklenen işlevler:
-<br>
-• Rehberde kişi oluşturma<br>
-• Rehberde kişi kaldırma<br>
-• Rehberdeki kişiye iletişim bilgisi ekleme<br>
-• Rehberdeki kişiden iletişim bilgisi kaldırma<br>
-• Rehberdeki kişilerin listelenmesi<br>
-• Rehberdeki bir kişiyle ilgili iletişim bilgilerinin de yer aldığı detay bilgilerin 
-getirilmesi<br>
-• Rehberdeki kişilerin bulundukları konuma göre istatistiklerini çıkartan bir rapor 
-talebi<br>
-• Sistemin oluşturduğu raporların listelenmesi<br>
-• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi<br>
-Teknik Tasarım
-Kişiler: Sistemde teorik anlamda sınırsız sayıda kişi kaydı yapılabilecektir. Her kişiye 
-bağlı iletişim bilgileri de yine sınırsız bir biçimde eklenebilmelidir.
-Karşılanması beklenen veri yapısındaki gerekli alanlar aşağıdaki gibidir:
-• UUID<br>
-• Ad<br>
-• Soyad<br>
-• Firma<br>
-• İletişim Bilgisi<br>
-o Bilgi Tipi: Telefon Numarası, E-mail Adresi, Konum<br>
-o Bilgi İçeriği<br>
-Rapor: Rapor talepleri asenkron çalışacaktır. Kullanıcı bir rapor talep ettiğinde, sistem 
-arkaplanda bu çalışmayı darboğaz yaratmadan sıralı bir biçimde ele alacak; rapor 
-tamamlandığında ise kullanıcının "raporların listelendiği" endpoint üzerinden raporun 
-durumunu "tamamlandı" olarak gözlemleyebilmesi gerekmektedir.<br>
-Rapor basitçe aşağıdaki bilgileri içerecektir:<br>
-• Konum Bilgisi<br>
-• O konumda yer alan rehbere kayıtlı kişi sayısı<br>
-• O konumda yer alan rehbere kayıtlı telefon numarası sayısı<br>
-Veri yapısı olarak da:<br>
-• UUID<br>
-• Raporun Talep Edildiği Tarih<br>
-• Rapor Durumu (Hazırlanıyor, Tamamlandı)<br>
-<br>
-<h3>Nasıl Çalıştırılır</h3>
-<br>
+# PhoneBookApp
+
+## Senaryo
+PhoneBookApp, birbirleri ile haberleşen en az iki microservice içeren bir yapıda tasarlanmış bir telefon rehberi uygulamasıdır. Uygulama, basit ve etkin telefon rehberi işlevlerini sunar.
+
+### Beklenen İşlevler
+- Rehberde kişi oluşturma
+- Rehberde kişi kaldırma
+- Rehberdeki kişiye iletişim bilgisi ekleme
+- Rehberdeki kişiden iletişim bilgisi kaldırma
+- Rehberdeki kişilerin listelenmesi
+- Rehberdeki bir kişiyle ilgili iletişim bilgilerinin detayları
+- Rehberdeki kişilerin konuma göre istatistik raporları
+- Sistemin oluşturduğu raporların listelenmesi
+- Bir raporun detay bilgilerinin getirilmesi
+
+### Teknik Tasarım
+- **Kişiler:** Sınırsız sayıda kişi kaydı ve her kişiye bağlı sınırsız iletişim bilgisi eklenebilir.
+- **Veri Yapısı:** UUID, Ad, Soyad, Firma, İletişim Bilgisi (Telefon Numarası, E-mail Adresi, Konum), Bilgi İçeriği.
+
+### Rapor
+- Raporlar asenkron çalışır.
+- Rapor bilgileri: Konum Bilgisi, O konumdaki kişi sayısı, O konumdaki telefon numarası sayısı.
+- Veri yapısı: UUID, Raporun Talep Edildiği Tarih, Rapor Durumu (Hazırlanıyor, Tamamlandı).
+
+## Nasıl Çalıştırılır
 PhoneBookApp uygulamasının çalıştırılması için aşağıdaki adımları takip edin:
-<br>
-<h4>1. Projeyi Kopyalayın</h4>
-<br>
-İlk olarak, projeyi yerel bilgisayarınıza kopyalamak için GitHub'dan klonlayın:
 
->> gh repo clone bora-yilmaz270/PhoneBookApp
-<br>
-<h4>2. Docker Kurulumu</h4>
-<br>
-<p>Kurulum için gerekli olan dosyalar docker.com adresinden indirilir ve işletim sistemine göre kurulum yapılır.</p>
-<br>
-<h4>3. Mongo Db</h4>   
-<p>Docker hub üzerinden (https://hub.docker.com/_/mongo)  adresinde verilen ilgili kurulum komutlarını kullanarak mongo db image’ını indirip container olarak çalıştırabilirsiniz. </p>
->> docker pull mongo <br>
->>docker run --name some-mongo -d mongo:tag<br>
-<br>
-<h4>4. RabbitMQ </h4>
-<p>Docker hub üzerinden (https://hub.docker.com/_/rabbitmq) adresinde verilen ilgili kurulum komutlarını kullanarak Rabbitmq image’ını indirip container olarak çalıştabilirsiniz. </p>
->>docker pull rabbitmq <br>
->> docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost rabbitmq:3-management<br>
+### 1. Projeyi Kopyalayın
+GitHub'dan projeyi klonlayın:
+gh repo clone bora-yilmaz270/PhoneBookApp
 
-<p>
-İlgili kurulumlar tamamlandıktan sonra projeyi VS ortamında çalıştırabilirsiniz.<br>
-Not: Docker arayüzden mongo db ve rabbitmq container’ların çalıştığını kontrol edebilirsiniz.
-</p>
+### 2. Docker Kurulumu
+Docker.com adresinden gerekli dosyaları indirip işletim sisteminize kurun.
 
-<br>
-<h3>HTTP İSTEKLERİ</h3>
-<HR/>
-PhoneBookApi<br>
-Contacts
-GET https://localhost:7066/api/Contacts<br>
-POST https://localhost:7066/api/Contacts<br>
-GET https://localhost:7066/api/Contacts/{id}<br>
-DELETE https://localhost:7066/api/Contacts/{id}<br>
-<br>
-ContactInfos
-GET https://localhost:7066/api/ContactInfos<br>
-POST https://localhost:7066/api/ContactInfos<br>
-DELETE https://localhost:7066/api/ContactInfos/{id}<br>
-<br>
+### 3. Mongo DB
+Docker hub üzerinden Mongo DB image'ını indirip container olarak çalıştırın:
+docker pull mongo
+docker run --name some-mongo -d mongo:tag
+
+### 4. RabbitMQ
+Docker hub üzerinden RabbitMQ image'ını indirip container olarak çalıştırın:
+docker pull rabbitmq
+docker run -d --hostname my-rabbit --name some-rabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost rabbitmq:3-management
+
+Kurulumlar tamamlandıktan sonra projeyi Visual Studio ortamında çalıştırabilirsiniz. Docker arayüzünden Mongo DB ve RabbitMQ container'larının çalıştığını kontrol edin.
+
+## HTTP İstekleri
+Aşağıda PhoneBookApi ve PhoneBookReportApi için HTTP istekleri listelenmiştir:
+
+### PhoneBookApi
+- `GET https://localhost:7066/api/Contacts`
+- `POST https://localhost:7066/api/Contacts`
+- `GET https://localhost:7066/api/Contacts/{id}`
+- `DELETE https://localhost:7066/api/Contacts/{id}`
+- `GET https://localhost:7066/api/ContactInfos`
+- `POST https://localhost:7066/api/ContactInfos`
+- `DELETE https://localhost:7066/api/ContactInfos/{id}`
+
+### Contact Dto Örnekleri
 POST https://localhost:7066/api/Contacts
-ContactCreateDto:<br>
+ContactCreateDto:
 
-name	string
-
-lastName	string
-
-company	string
-
-
+name: string
+lastName: string
+company: string
 POST https://localhost:7066/api/ContactInfos
-ContactInfoCreateDto:<br>
+ContactInfoCreateDto:
 
-contactId	string
+contactId: string
+infoType: string
+Value: string
 
-infoType	string
-
-Value	string
-
-
-
-
-
-
-PhoneBookReportApi
-
-GET https://localhost:7260/api/Report<br>
-POST https://localhost:7260/api/Report<br>
-GET https://localhost:7260/api/Report/{id}<br>
-GEThttps://localhost:7260/api/Report/GetDetailsByReportIdAsync/{id}<br>
-GET https://localhost:7260/api/Report/GetAllReportDetailAsync<br>
+### PhoneBookReportApi
+- `GET https://localhost:7260/api/Report`
+- `POST https://localhost:7260/api/Report`
+- `GET https://localhost:7260/api/Report/{id}`
+- `GET https://localhost:7260/api/Report/GetDetailsByReportIdAsync/{id}`
+- `GET https://localhost:7260/api/Report/GetAllReportDetailAsync`
